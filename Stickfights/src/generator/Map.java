@@ -15,7 +15,6 @@ import ruchomeObiekty.Player;
 public class Map {
 	
 	TileMenager tiles = new TileMenager();
-	Player player = new Player();
 	File plik;
 	
 	public Map(File plik) {
@@ -23,7 +22,6 @@ public class Map {
 	}
 	
 	public void init(){
-		player.init();
 		
 		
 		Scanner odczyt = null;
@@ -68,11 +66,9 @@ public class Map {
 
 	public void tick(double deltaTime){
 		tiles.tick(deltaTime);
-		player.tick(deltaTime);
 	}
 	
 	public void render(Graphics2D g){
 		tiles.render(g);
-		player.render(g);
 	}
 }

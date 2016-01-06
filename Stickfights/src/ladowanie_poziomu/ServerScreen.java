@@ -40,7 +40,7 @@ public class ServerScreen extends GameState {
 			delay++;
 		}
 		if (polaczenie.connected){
-			gsm.states.push(new MultiplayerLevelLoaderServer(gsm));
+			gsm.states.push(new MultiplayerLevelLoaderServer(gsm,polaczenie));
 		}
 	}
 

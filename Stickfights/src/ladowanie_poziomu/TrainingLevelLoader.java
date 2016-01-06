@@ -11,6 +11,7 @@ import engine.SpriteSheet;
 import generator.Map;
 import engine.LoadImageFrom;
 import glowne.Stickfights;
+import ruchomeObiekty.Player;
 import stany_gry.GameState;
 import stany_gry.GameStateManager;
 
@@ -19,6 +20,7 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 	Map map;
 	SpriteSheet background = new SpriteSheet();
 	private static boolean quit = false;
+	Player player = new Player();
 	
 	public TrainingLevelLoader(GameStateManager gsm){
 		super(gsm);
@@ -26,6 +28,8 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 	
 	@Override
 	public void init() {
+		
+		player.init();
 		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
 		File plik = new File("mapa.txt");
 		map = new Map(plik);
@@ -35,6 +39,7 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 	@Override
 	public void tick(double deltaTime) {
 		map.tick(deltaTime);
+		player.tick(deltaTime);
 	}
 
 	@Override
@@ -43,7 +48,9 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 		//g.drawString("Hello world", 200, 200);
 
 		g.drawImage(background.getTile(0, 0, 999, 699),0,0,Stickfights.width, Stickfights.height, null);
+		
 		map.render(g);
+		player.render(g);
 	}
 
 	@Override

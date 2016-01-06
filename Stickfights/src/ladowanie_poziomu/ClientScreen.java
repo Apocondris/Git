@@ -10,12 +10,15 @@ import javax.swing.JTextField;
 
 import engine.OknoGry;
 import glowne.Stickfights;
+import polaczenie.ConnectionClient;
+import polaczenie.ConnectionSever;
 import stany_gry.GameState;
 import stany_gry.GameStateManager;
 
 public class ClientScreen extends GameState implements KeyListener{
 	private static boolean enter=false;
 	private static String ip="";
+	ConnectionClient polaczenie;
 
 	public ClientScreen(GameStateManager gsm) {
 		super(gsm);
@@ -30,7 +33,10 @@ public class ClientScreen extends GameState implements KeyListener{
 	@Override
 	public void tick(double deltaTime) {
 		if (enter){
-			gsm.states.push(new MultiplayerLevelLoaderClient(gsm));
+			polaczenie = new ConnectionClient(ip);
+			if(polaczenie.connected){
+				gsm.states.push(new MultiplayerLevelLoaderClient(gsm,polaczenie));
+			}
 		}
 		enter = false;
 	}
@@ -79,6 +85,9 @@ public class ClientScreen extends GameState implements KeyListener{
 		}
 		if(key == KeyEvent.VK_PERIOD){
 			ip=ip+".";
+		}
+		if(key == KeyEvent.VK_BACK_SPACE){
+			ip=ip.substring(0,ip.length()-1);
 		}
 		if(key == KeyEvent.VK_ENTER){
 			enter = true;
