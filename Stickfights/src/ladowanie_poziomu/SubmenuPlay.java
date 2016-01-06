@@ -29,12 +29,13 @@ public class SubmenuPlay extends GameState implements KeyListener{
 	public void tick(double deltaTime) {
 		if (enter){
 			if (currentSelection == 0){
-				//gsm.states.push(new ConectionScreen(gsm,okno));
 				gsm.states.push(new ClientScreen(gsm));
+				gsm.states.peek().init();
 				enter = false;
 			}
 			else if (currentSelection == 1){
 				gsm.states.push(new ServerScreen(gsm));
+				gsm.states.peek().init();
 				enter = false;
 			}
 			else if (currentSelection == 2){
@@ -51,7 +52,7 @@ public class SubmenuPlay extends GameState implements KeyListener{
 		g.setFont(new Font("Ariel", Font.BOLD, 40));
 		for (int i=0; i<options.length; i++){
 			if(i == currentSelection){
-				g.setColor(Color.GRAY.darker());
+				g.setColor(new Color(255, 0, 0));
 			}
 			else {
 				g.setColor(Color.BLACK);

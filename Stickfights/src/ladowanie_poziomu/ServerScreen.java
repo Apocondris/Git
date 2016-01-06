@@ -6,9 +6,12 @@ import java.awt.Graphics2D;
 import stany_gry.GameState;
 import stany_gry.GameStateManager;
 
+import polaczenie.ConnectionSever;
+
 public class ServerScreen extends GameState {
 	private String wait = "";
 	int delay=0;
+	ConnectionSever polaczenie;
 
 	public ServerScreen(GameStateManager gsm) {
 		super(gsm);
@@ -16,12 +19,15 @@ public class ServerScreen extends GameState {
 
 	@Override
 	public void init() {
-
+		polaczenie = new ConnectionSever();
+		
+		Thread th = new Thread(polaczenie);
+		th.start();
 	}
 
 	@Override
 	public void tick(double deltaTime) {
-		if(delay >= 40){
+		if(delay >= 30){
 			if(wait.length()<15){
 				wait+=" . ";
 			}
@@ -33,7 +39,9 @@ public class ServerScreen extends GameState {
 		else {
 			delay++;
 		}
-
+		if (polaczenie.connected){
+			gsm.states.push(new MultiplayerLevelLoaderServer(gsm));
+		}
 	}
 
 	@Override

@@ -2,36 +2,28 @@ package polaczenie;
 
 import java.io.*;
 import java.net.*;
+import java.util.concurrent.Callable;
 
-public class ConnectionSever {
-	int port = 10001;
+public class ConnectionSever implements Runnable{
+	int port = 52825;
 	String odebrane;
 	String wysylane;
 	ServerSocket serverSocket;
 	Socket connectionSocket;  
+	public Boolean connected=false;
 	
 	public ConnectionSever() {
 		try {
 			serverSocket = new ServerSocket(port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public void waitForConnection(){
-		// czekamy na zg³oszenie klienta ...
-		try {
-			connectionSocket = serverSocket.accept();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.connected = false;
 	}
 	
 	//TODO -- zmieniæ typ danych
 	public void sendData(Object data) throws IOException{
-		// wysylanie
+
 		DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());   
 		BufferedReader inFromUser = new BufferedReader( new InputStreamReader(System.in)); 
 
@@ -40,10 +32,19 @@ public class ConnectionSever {
 	
 	//TODO -- zmieniæ typ danych
 	public Object getData() throws IOException {
-		//odbieranie
+		
 		BufferedReader inFromClient = new BufferedReader(
 				new InputStreamReader(connectionSocket.getInputStream()));                       
 		odebrane = inFromClient.readLine();             
 		return odebrane;
+	}
+
+	@Override
+	public void run() {
+		try {
+			connectionSocket = serverSocket.accept();
+			connected = true;
+		} catch (IOException e) {
+		}
 	}
 }

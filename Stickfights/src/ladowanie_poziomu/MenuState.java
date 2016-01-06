@@ -20,6 +20,7 @@ public class MenuState extends GameState implements KeyListener{
 	public MenuState(GameStateManager gsm, OknoGry okno) {
 		super(gsm);
 		this.okno=okno;
+		enter=false;
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class MenuState extends GameState implements KeyListener{
 		g.setFont(new Font("Ariel", Font.BOLD, 40));
 		for (int i=0; i<options.length; i++){
 			if(i == currentSelection){
-				g.setColor(Color.GRAY.darker());
+				g.setColor(new Color(255, 0, 0));
 			}
 			else {
 				g.setColor(Color.BLACK);
