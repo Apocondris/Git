@@ -59,6 +59,7 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 		
 		if(key == KeyEvent.VK_ESCAPE){
 			gsm.states.pop();
+			gsm.states.push(new MenuState(gsm));
 		}
 	}
 

@@ -50,30 +50,44 @@ public class Player implements KeyListener {
 	}
 
 	public void init() {
+		
+		ladujTekstury("black");
+		skillJ.init();
+		
+	}
+
+	private void ladujTekstury(String kolor) {
+		
 		listStay = new ArrayList<BufferedImage>();
 		listJumpRight = new ArrayList<BufferedImage>();
 		listJumpLeft = new ArrayList<BufferedImage>();
 		listRight = new ArrayList<BufferedImage>();
 		listLeft = new ArrayList<BufferedImage>();
-		
+		if (kolor.equals("black")){
+			listStay.add(Assets.blackPlayerRun.getTile(0, 180, 25, 90));
+			
+			listRight.add(Assets.blackPlayerRun.getTile(0, 0, 25, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(25, 0, 25, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(50, 0, 25, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(75, 0, 25, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(100, 0, 25, 90));
+			
+			listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 25, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(25, 90, 25, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(50, 90, 25, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(75, 90, 25, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(100, 90, 25, 90));
+			
+			listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
 
-		listStay.add(Assets.blackPlayerRun.getTile(0, 180, 25, 90));
-		
-		listRight.add(Assets.blackPlayerRun.getTile(0, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(25, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(50, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(75, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(100, 0, 25, 90));
-		
-		listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(25, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(50, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(75, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(100, 90, 25, 90));
-		
-		listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
-
-		listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+			listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+		}
+		if (kolor.equals("blue")){
+			
+		}
+		if (kolor.equals("red")){
+			
+		}
 		
 		ani_Stay = new Animator(listStay);
 		ani_Stay.setSpeed(100);
@@ -94,8 +108,6 @@ public class Player implements KeyListener {
 		ani_Left = new Animator(listLeft);
 		ani_Left.setSpeed(100);
 		ani_Left.play();
-		
-		skillJ.init();
 		
 	}
 
@@ -226,7 +238,7 @@ public class Player implements KeyListener {
 				ani_JumpLeft.update(System.currentTimeMillis());
 			}
 		}
-		//prawo
+		//ruch w prawo
 		if(animationState == 3){
 			this.width = 25;
 			g.drawImage(ani_Right.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
@@ -234,7 +246,7 @@ public class Player implements KeyListener {
 				ani_Right.update(System.currentTimeMillis());
 			}
 		}
-		//lewo
+		//ruch w lewo
 		if(animationState == 4){
 			this.width = 25;
 			g.drawImage(ani_Left.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);

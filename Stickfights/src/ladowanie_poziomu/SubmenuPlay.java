@@ -29,17 +29,20 @@ public class SubmenuPlay extends GameState implements KeyListener{
 	public void tick(double deltaTime) {
 		if (enter){
 			if (currentSelection == 0){
+				gsm.states.pop();
 				gsm.states.push(new ClientScreen(gsm));
 				gsm.states.peek().init();
 				enter = false;
 			}
 			else if (currentSelection == 1){
+				gsm.states.pop();
 				gsm.states.push(new ServerScreen(gsm));
 				gsm.states.peek().init();
 				enter = false;
 			}
 			else if (currentSelection == 2){
 				gsm.states.pop();
+				gsm.states.push(new MenuState(gsm));
 				enter = false;
 			}
 		}

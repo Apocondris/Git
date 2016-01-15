@@ -35,6 +35,7 @@ public class ClientScreen extends GameState implements KeyListener{
 		if (enter){
 			polaczenie = new ConnectionClient(ip);
 			if(polaczenie.connected){
+				gsm.states.pop();
 				gsm.states.push(new MultiplayerLevelLoaderClient(gsm,polaczenie));
 			}
 		}

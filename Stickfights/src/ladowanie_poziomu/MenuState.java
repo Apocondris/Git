@@ -22,6 +22,11 @@ public class MenuState extends GameState implements KeyListener{
 		this.okno=okno;
 		enter=false;
 	}
+	
+	public MenuState(GameStateManager gsm) {
+		super(gsm);
+		enter=false;
+	}
 
 	@Override
 	public void init() {
@@ -31,18 +36,27 @@ public class MenuState extends GameState implements KeyListener{
 	public void tick(double deltaTime) {
 		if (enter){
 			if (currentSelection == 0){
-				//gsm.states.push(new ConectionScreen(gsm,okno));
+				gsm.states.pop();
 				gsm.states.push(new SubmenuPlay(gsm));
 				enter = false;
 			}
 			else if (currentSelection == 1){
+				gsm.states.pop();
 				gsm.states.push(new TrainingLevelLoader(gsm));
 				gsm.states.peek().init();
 				enter = false;
 			}
 			else if (currentSelection == 2){
+				gsm.states.pop();
+				gsm.states.push(new HeroConfigScreen(gsm));
+				gsm.states.peek().init();
+				enter = false;
 			}
 			else if (currentSelection == 3){
+				gsm.states.pop();
+				gsm.states.push(new StatisticScreen(gsm));
+				gsm.states.peek().init();
+				enter = false;
 			}
 			else if (currentSelection == 4){
 				System.exit(1);
