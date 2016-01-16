@@ -20,9 +20,8 @@ public class MultiplayerLevelLoaderClient extends GameState {
 	ConnectionClient polaczenie;
 	Map map;
 	SpriteSheet background = new SpriteSheet();
-	private static boolean quit = false;
-	Player player = new Player();
-	EnemyPlayer enemyPlayer = new EnemyPlayer();
+	Player player = new Player(800,700);
+	EnemyPlayer enemyPlayer = new EnemyPlayer(200,700);
 	
 	
 

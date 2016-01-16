@@ -48,6 +48,11 @@ public class EnemyPlayer {
 	public EnemyPlayer() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
 	}
+	
+	public EnemyPlayer (int posX, int posY)
+	{
+		pos = new Vector2F(posX, posY);
+	}
 
 	public void init() {
 		listStay = new ArrayList<BufferedImage>();

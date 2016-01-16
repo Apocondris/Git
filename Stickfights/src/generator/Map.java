@@ -35,17 +35,17 @@ public class Map {
 		tiles.blocks.add(
 				new Block(
 						new Vector2F(0,Stickfights.height-35),
-						Stickfights.width,10));
+						Stickfights.width,30));
 		
 		tiles.blocks.add(
 				new Block(
-						new Vector2F(0,0),
-						3,Stickfights.height));
+						new Vector2F(-20,0),
+						30,Stickfights.height));
 		
 		tiles.blocks.add(
 				new Block(
-						new Vector2F(Stickfights.width-10,0),
-						Stickfights.width,Stickfights.height));
+						new Vector2F(Stickfights.width-15,0),
+						30,Stickfights.height));
 		
 
 		int posX, posY, sizeX, sizeY;

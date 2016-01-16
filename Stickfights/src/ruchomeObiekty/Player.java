@@ -48,6 +48,11 @@ public class Player implements KeyListener {
 	public Player() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
 	}
+	
+	public Player (int posX, int posY)
+	{
+		pos = new Vector2F(posX, posY);
+	}
 
 	public void init() {
 		
@@ -113,10 +118,10 @@ public class Player implements KeyListener {
 
 	public void tick(double deltaTime) {
 		float moveAmount = (float)(speed * deltaTime);
-		float jumpAmount = (float) (1.5*speed * deltaTime);
+		float jumpAmount = (float) (2.*speed * deltaTime);
 		
 		if(up){
-			if(flaga<40){
+			if(flaga<33){
 				if (!Check.CollisionPlayerBlock(
 					new Point((int) (pos.xPos),
 						(int) (pos.yPos - jumpAmount) ),
