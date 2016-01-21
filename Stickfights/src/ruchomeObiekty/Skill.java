@@ -36,18 +36,32 @@ public class Skill {
 		
 		listSkillRight.add(grafika.getTile(0, 0, 40, 90));
 		listSkillRight.add(grafika.getTile(40, 0, 40, 90));
-		listSkillRight.add(grafika.getTile(80, 0, 40, 90));
+		//listSkillRight.add(grafika.getTile(80, 0, 40, 90));
+		listSkillRight.add(grafika.getTile(120, 0, 40, 90));
+		listSkillRight.add(grafika.getTile(160, 0, 40, 90));
+		//listSkillRight.add(grafika.getTile(200, 0, 40, 90));
+		listSkillRight.add(grafika.getTile(240, 0, 40, 90));
+		listSkillRight.add(grafika.getTile(280, 0, 40, 90));
+		listSkillRight.add(grafika.getTile(320, 0, 40, 90));
+		//listSkillRight.add(grafika.getTile(360, 0, 40, 90));
 		
 		listSkillLeft.add(grafika.getTile(0, 90, 40, 90));
 		listSkillLeft.add(grafika.getTile(40, 90, 40, 90));
-		listSkillLeft.add(grafika.getTile(80, 90, 40, 90));
+		//listSkillLeft.add(grafika.getTile(80, 90, 40, 90));
+		listSkillLeft.add(grafika.getTile(120, 90, 40, 90));
+		listSkillLeft.add(grafika.getTile(160, 90, 40, 90));
+		//listSkillLeft.add(grafika.getTile(200, 90, 40, 90));
+		listSkillLeft.add(grafika.getTile(240, 90, 40, 90));
+		listSkillLeft.add(grafika.getTile(280, 90, 40, 90));
+		listSkillLeft.add(grafika.getTile(320, 90, 40, 90));
+		//listSkillLeft.add(grafika.getTile(360, 90, 40, 90));
 		
 		ani_SkillRight = new Animator(listSkillRight);
-		ani_SkillRight.setSpeed(200);
+		ani_SkillRight.setSpeed(50);
 		ani_SkillRight.play();
 		
 		ani_SkillLeft = new Animator(listSkillLeft);
-		ani_SkillLeft.setSpeed(200);
+		ani_SkillLeft.setSpeed(50);
 		ani_SkillLeft.play();
 	}
 	

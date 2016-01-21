@@ -30,8 +30,8 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 	public void init() {
 		
 		player.init();
-		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
-		File plik = new File("mapa.txt");
+		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map2.png"));
+		File plik = new File("mapa2.txt");
 		map = new Map(plik);
 		map.init();
 	}

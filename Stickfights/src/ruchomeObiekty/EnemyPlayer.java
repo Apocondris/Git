@@ -43,7 +43,9 @@ public class EnemyPlayer {
 	private static int flaga=0;
 	private static int flaga2=0;
 	
-	Skill skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.blackPlayerHit);
+	private Skill skillJ;
+	private Skill skillK;
+	private Skill skillL;
 	
 	public EnemyPlayer() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
@@ -55,30 +57,62 @@ public class EnemyPlayer {
 	}
 
 	public void init() {
+		ladujTekstury("red");
+		skillJ.init();
+		
+	}
+
+	private void ladujTekstury(String kolor) {
 		listStay = new ArrayList<BufferedImage>();
 		listJumpRight = new ArrayList<BufferedImage>();
 		listJumpLeft = new ArrayList<BufferedImage>();
 		listRight = new ArrayList<BufferedImage>();
 		listLeft = new ArrayList<BufferedImage>();
-		
+		if (kolor.equals("black")){
+			listStay.add(Assets.blackPlayerRun.getTile(0, 180, 30, 90));
+			
+			listRight.add(Assets.blackPlayerRun.getTile(0, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(30, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(60, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(90, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(120, 0, 30, 90));
+			
+			listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(30, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(60, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(90, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(120, 90, 30, 90));
+			
+			listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
 
-		listStay.add(Assets.blackPlayerRun.getTile(0, 180, 25, 90));
-		
-		listRight.add(Assets.blackPlayerRun.getTile(0, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(25, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(50, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(75, 0, 25, 90));
-		listRight.add(Assets.blackPlayerRun.getTile(100, 0, 25, 90));
-		
-		listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(25, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(50, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(75, 90, 25, 90));
-		listLeft.add(Assets.blackPlayerRun.getTile(100, 90, 25, 90));
-		
-		listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
+			listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+			
+			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.blackPlayerHit);
+		}
+		if (kolor.equals("blue")){
+			
+		}
+		if (kolor.equals("red")){
+			listStay.add(Assets.blackPlayerRun.getTile(0, 180, 30, 90));
+			
+			listRight.add(Assets.redPlayerRun.getTile(0, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(30, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(60, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(90, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(120, 0, 30, 90));
+			
+			listLeft.add(Assets.redPlayerRun.getTile(0, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(30, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(60, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(90, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(120, 90, 30, 90));
+			
+			listJumpRight.add(Assets.redPlayerRun.getTile(50, 0, 25, 90));
 
-		listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+			listJumpLeft.add(Assets.redPlayerRun.getTile(50, 90, 25, 90));
+			
+			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.redPlayerHit);
+		}
 		
 		ani_Stay = new Animator(listStay);
 		ani_Stay.setSpeed(100);
@@ -99,8 +133,6 @@ public class EnemyPlayer {
 		ani_Left = new Animator(listLeft);
 		ani_Left.setSpeed(100);
 		ani_Left.play();
-		
-		skillJ.init();
 		
 	}
 

@@ -43,7 +43,9 @@ public class Player implements KeyListener {
 	private static int flaga=0;
 	private static int flaga2=0;
 	
-	Skill skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.blackPlayerHit);
+	private Skill skillJ;
+	private Skill skillK;
+	private Skill skillL;
 	
 	public Player() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
@@ -69,29 +71,49 @@ public class Player implements KeyListener {
 		listRight = new ArrayList<BufferedImage>();
 		listLeft = new ArrayList<BufferedImage>();
 		if (kolor.equals("black")){
-			listStay.add(Assets.blackPlayerRun.getTile(0, 180, 25, 90));
+			listStay.add(Assets.blackPlayerRun.getTile(0, 180, 30, 90));
 			
-			listRight.add(Assets.blackPlayerRun.getTile(0, 0, 25, 90));
-			listRight.add(Assets.blackPlayerRun.getTile(25, 0, 25, 90));
-			listRight.add(Assets.blackPlayerRun.getTile(50, 0, 25, 90));
-			listRight.add(Assets.blackPlayerRun.getTile(75, 0, 25, 90));
-			listRight.add(Assets.blackPlayerRun.getTile(100, 0, 25, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(0, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(30, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(60, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(90, 0, 30, 90));
+			listRight.add(Assets.blackPlayerRun.getTile(120, 0, 30, 90));
 			
-			listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 25, 90));
-			listLeft.add(Assets.blackPlayerRun.getTile(25, 90, 25, 90));
-			listLeft.add(Assets.blackPlayerRun.getTile(50, 90, 25, 90));
-			listLeft.add(Assets.blackPlayerRun.getTile(75, 90, 25, 90));
-			listLeft.add(Assets.blackPlayerRun.getTile(100, 90, 25, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(0, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(30, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(60, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(90, 90, 30, 90));
+			listLeft.add(Assets.blackPlayerRun.getTile(120, 90, 30, 90));
 			
 			listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
 
 			listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+			
+			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.blackPlayerHit);
 		}
 		if (kolor.equals("blue")){
 			
 		}
 		if (kolor.equals("red")){
+			listStay.add(Assets.redPlayerRun.getTile(0, 180, 30, 90));
 			
+			listRight.add(Assets.redPlayerRun.getTile(0, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(30, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(60, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(90, 0, 30, 90));
+			listRight.add(Assets.redPlayerRun.getTile(120, 0, 30, 90));
+			
+			listLeft.add(Assets.redPlayerRun.getTile(0, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(30, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(60, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(90, 90, 30, 90));
+			listLeft.add(Assets.redPlayerRun.getTile(120, 90, 30, 90));
+			
+			listJumpRight.add(Assets.redPlayerJump.getTile(50, 0, 25, 90));
+
+			listJumpLeft.add(Assets.redPlayerJump.getTile(50, 90, 25, 90));
+			
+			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.redPlayerHit);
 		}
 		
 		ani_Stay = new Animator(listStay);
@@ -220,7 +242,7 @@ public class Player implements KeyListener {
 		
 		//stay
 		if(animationState == 0){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Stay.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(!right && !left && !up){
 				ani_Stay.update(System.currentTimeMillis());
@@ -228,7 +250,7 @@ public class Player implements KeyListener {
 		}
 		//skok w prawo
 		if(animationState == 1){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_JumpRight.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(right && up || up && lookRight){
 				ani_JumpRight.update(System.currentTimeMillis());
@@ -237,7 +259,7 @@ public class Player implements KeyListener {
 		}
 		//skok w lewo
 		if(animationState == 2){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_JumpLeft.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(left && up || up && lookLeft){
 				ani_JumpLeft.update(System.currentTimeMillis());
@@ -245,7 +267,7 @@ public class Player implements KeyListener {
 		}
 		//ruch w prawo
 		if(animationState == 3){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Right.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(right){
 				ani_Right.update(System.currentTimeMillis());
@@ -253,7 +275,7 @@ public class Player implements KeyListener {
 		}
 		//ruch w lewo
 		if(animationState == 4){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Left.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(left){
 				ani_Left.update(System.currentTimeMillis());
@@ -274,7 +296,7 @@ public class Player implements KeyListener {
 		//cios J w lewo
 		if(animationState == 12){
 			this.width = 40;
-			pos.xPos -= 15.;
+			pos.xPos -= 10.;
 			g.drawImage(skillJ.ani_SkillLeft.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(lookLeft && useSkillJ){
 				if(!skillJ.ani_SkillLeft.updateSkill(System.currentTimeMillis())) {
@@ -283,7 +305,7 @@ public class Player implements KeyListener {
 					skillJ.ani_SkillLeft.reset();
 				}
 			}
-			pos.xPos += 15.;
+			pos.xPos += 10.;
 		}
 	}
 
