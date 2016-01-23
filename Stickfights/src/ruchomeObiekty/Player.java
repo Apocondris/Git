@@ -85,13 +85,32 @@ public class Player implements KeyListener {
 			listLeft.add(Assets.blackPlayerRun.getTile(90, 90, 30, 90));
 			listLeft.add(Assets.blackPlayerRun.getTile(120, 90, 30, 90));
 			
-			listJumpRight.add(Assets.blackPlayerJump.getTile(50, 0, 25, 90));
+			listJumpRight.add(Assets.blackPlayerJump.getTile(30, 0, 30, 90));
 
-			listJumpLeft.add(Assets.blackPlayerJump.getTile(50, 90, 25, 90));
+			listJumpLeft.add(Assets.blackPlayerJump.getTile(30, 90, 30, 90));
 			
 			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.blackPlayerHit);
 		}
 		if (kolor.equals("blue")){
+			listStay.add(Assets.bluePlayerRun.getTile(0, 180, 30, 90));
+			
+			listRight.add(Assets.bluePlayerRun.getTile(0, 0, 30, 90));
+			listRight.add(Assets.bluePlayerRun.getTile(30, 0, 30, 90));
+			listRight.add(Assets.bluePlayerRun.getTile(60, 0, 30, 90));
+			listRight.add(Assets.bluePlayerRun.getTile(90, 0, 30, 90));
+			listRight.add(Assets.bluePlayerRun.getTile(120, 0, 30, 90));
+			
+			listLeft.add(Assets.bluePlayerRun.getTile(0, 90, 30, 90));
+			listLeft.add(Assets.bluePlayerRun.getTile(30, 90, 30, 90));
+			listLeft.add(Assets.bluePlayerRun.getTile(60, 90, 30, 90));
+			listLeft.add(Assets.bluePlayerRun.getTile(90, 90, 30, 90));
+			listLeft.add(Assets.bluePlayerRun.getTile(120, 90, 30, 90));
+			
+			listJumpRight.add(Assets.bluePlayerJump.getTile(30, 0, 30, 90));
+
+			listJumpLeft.add(Assets.bluePlayerJump.getTile(30, 90, 30, 90));
+			
+			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.bluePlayerHit);
 			
 		}
 		if (kolor.equals("red")){
@@ -109,9 +128,9 @@ public class Player implements KeyListener {
 			listLeft.add(Assets.redPlayerRun.getTile(90, 90, 30, 90));
 			listLeft.add(Assets.redPlayerRun.getTile(120, 90, 30, 90));
 			
-			listJumpRight.add(Assets.redPlayerJump.getTile(50, 0, 25, 90));
+			listJumpRight.add(Assets.redPlayerJump.getTile(30, 0, 30, 90));
 
-			listJumpLeft.add(Assets.redPlayerJump.getTile(50, 90, 25, 90));
+			listJumpLeft.add(Assets.redPlayerJump.getTile(30, 90, 30, 90));
 			
 			skillJ = new Skill("Cios piêœci¹", 0, 10, 0, 0, Assets.redPlayerHit);
 		}
