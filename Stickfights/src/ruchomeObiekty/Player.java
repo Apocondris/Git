@@ -22,7 +22,7 @@ public class Player implements KeyListener {
 	private int width = 30; 
 	private int height = 70;
 	private static boolean up,down = true,left,right, useSkill=false;
-	private static boolean lookLeft, lookRight, useSkillJ;
+	private static boolean lookLeft, lookRight, useSkillJ, useSkillK, useSkillL;
 	private float speed = 2.9F;
 	private float zdrowie = 2.8F;
 	private float wytrzymalosc = 2.8F;
@@ -353,8 +353,12 @@ public class Player implements KeyListener {
 			useSkillJ = true;
 		}
 		if(key == KeyEvent.VK_K){
+			useSkill = true;
+			useSkillK = true;
 		}
 		if(key == KeyEvent.VK_L){
+			useSkill = true;
+			useSkillL = true;
 		}
 	}
 
@@ -375,12 +379,15 @@ public class Player implements KeyListener {
 		
 	}
 
-	public String[] getPresserdKeys() {
-		String[] data = {"0","0","0","0","0"};
+	public String[] getPressedKeys() {
+		String[] data = {"0","0","0","0","0","0","0","0"};
 		if(up == true) data[0] = "1";
 		if(down == true) data[1] = "1";
 		if(left == true) data[2] = "1";
 		if(right == true) data[3] = "1";
+		if(useSkillJ == true) data[4] = "1";
+		if(useSkillK == true) data[5] = "1";
+		if(useSkillL == true) data[6] = "1";
 		return data;
 	}
 

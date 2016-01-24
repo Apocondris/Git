@@ -22,7 +22,7 @@ public class EnemyPlayer {
 	private int width = 30; 
 	private int height = 70;
 	private static boolean up,down = true,left,right, useSkill=false;
-	private static boolean lookLeft, lookRight, useSkillJ;
+	private static boolean lookLeft, lookRight, useSkillJ, useSkillK, useSkillL;
 	private float speed = 2.9F;
 	private float zdrowie = 2.8F;
 	private float wytrzymalosc = 2.8F;
@@ -158,11 +158,10 @@ public class EnemyPlayer {
 
 	public void tick(double deltaTime) {
 		float moveAmount = (float)(speed);
-		//float moveAmount = (float)(speed * deltaTime);
 		float jumpAmount = (float) (2.*speed);
 		
 		if(up){
-			if(flaga<40){
+			if(flaga<33){
 				if (!Check.CollisionPlayerBlock(
 					new Point((int) (pos.xPos),
 						(int) (pos.yPos - jumpAmount) ),
@@ -333,6 +332,9 @@ public class EnemyPlayer {
 		if(enemyKeys[1].equals("1")) down = true; else down = false;
 		if(enemyKeys[2].equals("1")) left = true; else left = false;
 		if(enemyKeys[3].equals("1")) right = true; else right = false;
+		if(enemyKeys[4].equals("1")) useSkillJ = true; else useSkillJ = false;
+		if(enemyKeys[5].equals("1")) useSkillK = true; else useSkillK = false;
+		if(enemyKeys[6].equals("1")) useSkillL = true; else useSkillL = false;
 	}
 	
 	public Object getPos() {

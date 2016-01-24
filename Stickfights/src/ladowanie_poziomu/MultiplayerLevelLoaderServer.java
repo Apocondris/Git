@@ -42,17 +42,17 @@ public class MultiplayerLevelLoaderServer extends GameState {
 
 	@Override
 	public void tick(double deltaTime) {
-		String[] data = {"0","0","0","0","0"};
-		String enemyKeys = "00000";
+		String[] data = {"0","0","0","0","0","0","0","0"};
+		String enemyKeys = "00000000";
 		przebiegi ++;
 		
 
 		map.tick(deltaTime);
 		player.tick(deltaTime);
 		try {
-			data = player.getPresserdKeys();
-			if(przebiegi > 150) data[4] = "1";
-			else data[4] = "0";
+			data = player.getPressedKeys();
+			if(przebiegi > 350) data[7] = "1";
+			else data[7] = "0";
 			polaczenie.sendData(data);
 			
 			enemyKeys = polaczenie.getData();

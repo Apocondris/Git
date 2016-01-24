@@ -44,11 +44,8 @@ public class MultiplayerLevelLoaderClient extends GameState {
 
 	@Override
 	public void tick(double deltaTime) {
-		String[] data = {"0","0","0","0","0"};
-		String enemyKeys = "00000";
-		for (int i=0; i<5; i++) {
-			data[i] = "0";
-		}
+		String[] data = {"0","0","0","0","0","0","0","0"};
+		String enemyKeys = "00000000";
 		
 		map.tick(deltaTime);
 		player.tick(deltaTime);
@@ -57,11 +54,11 @@ public class MultiplayerLevelLoaderClient extends GameState {
 			enemyKeys = polaczenie.getData();
 			data = enemyKeys.split("");
 			enemyPlayer.setKeys(data);
-			if(data[4]=="1"){
+			if(data[7]=="1"){
 				
 			}
 			
-			data = player.getPresserdKeys();
+			data = player.getPressedKeys();
 			polaczenie.sendData(data);
 			
 		} catch (IOException e) {
