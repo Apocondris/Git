@@ -25,7 +25,7 @@ public class ConnectionSever implements Runnable{
 	//TODO -- zmieniæ typ danych
 	public void sendData(String[] data) throws IOException{
 
-		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4];
+		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4] + data[5] + data[6] + data[7];
 		System.out.println("wysylane - " + wiadomosc);
 		PrintWriter out = new PrintWriter(connectionSocket.getOutputStream(), true);
 		out.println(wiadomosc);

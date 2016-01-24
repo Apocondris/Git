@@ -26,7 +26,8 @@ public class Block extends Rectangle{
 	}
 
 	public void render (Graphics2D g){
-		g.setColor(new Color(88, 88, 88));
+		//g.setColor(new Color(88, 88, 88));
+		g.setColor(new Color(10, 10, 10, 0));
 		g.fillRect((int)pos.xPos, (int)pos.yPos, BlockSizeX, BlockSizeY);
 	}
 	

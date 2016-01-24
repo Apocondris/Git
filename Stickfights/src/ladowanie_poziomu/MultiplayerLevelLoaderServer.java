@@ -19,8 +19,8 @@ public class MultiplayerLevelLoaderServer extends GameState {
 	ConnectionSever polaczenie;
 	Map map;
 	SpriteSheet background = new SpriteSheet();
-	Player player = new Player(700,600);
-	EnemyPlayer enemyPlayer = new EnemyPlayer(800,700);
+	Player player;
+	EnemyPlayer enemyPlayer;
 	int przebiegi = 0;
 	
 	public MultiplayerLevelLoaderServer(GameStateManager gsm, ConnectionSever polaczenie) {
@@ -31,8 +31,10 @@ public class MultiplayerLevelLoaderServer extends GameState {
 
 	@Override
 	public void init() {
-		player.init();
-		enemyPlayer.init();
+		player = new Player(200,690);
+		enemyPlayer = new EnemyPlayer(800,690);
+		player.init(enemyPlayer);
+		enemyPlayer.init(player);
 		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
 		File plik = new File("mapa.txt");
 		map = new Map(plik);

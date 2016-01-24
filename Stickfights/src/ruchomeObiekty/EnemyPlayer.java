@@ -24,10 +24,11 @@ public class EnemyPlayer {
 	private static boolean up,down = true,left,right, useSkill=false;
 	private static boolean lookLeft, lookRight, useSkillJ, useSkillK, useSkillL;
 	private float speed = 2.9F;
-	private float zdrowie = 2.8F;
-	private float wytrzymalosc = 2.8F;
+	private float zdrowie = 100;
+	private float wytrzymalosc = 100;
 	
 	private int animationState = 0;
+	Player player;
 	
 	private ArrayList<BufferedImage> listStay;
 	Animator ani_Stay;
@@ -49,17 +50,24 @@ public class EnemyPlayer {
 	
 	public EnemyPlayer() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
+		this.zdrowie = 100;
 	}
 	
 	public EnemyPlayer (int posX, int posY)
 	{
 		pos = new Vector2F(posX, posY);
+		this.zdrowie = 100;
 	}
 
 	public void init() {
 		ladujTekstury("red");
 		skillJ.init();
-		
+	}
+	
+	public void init(Player gracz) {
+		this.player = gracz;
+		ladujTekstury("red");
+		skillJ.init();
 	}
 
 	private void ladujTekstury(String kolor) {
@@ -158,7 +166,7 @@ public class EnemyPlayer {
 
 	public void tick(double deltaTime) {
 		float moveAmount = (float)(speed);
-		float jumpAmount = (float) (2.*speed);
+		float jumpAmount = (float) (2.1*speed);
 		
 		if(up){
 			if(flaga<33){
@@ -247,9 +255,25 @@ public class EnemyPlayer {
 			animationState = 2;
 		}
 		if(useSkillJ && lookRight){
+			if (Check.CollisionPlayerHit(
+					new Point((int) (pos.xPos + width),
+							(int) pos.yPos),
+					new Point((int) (pos.xPos + width),
+							(int) pos.yPos + (height / 2)),
+					player) && useSkill && animationState != 11){
+				player.dostal(skillJ.obrazenia);
+			}
 			animationState = 11;
 		}
 		if(useSkillJ && lookLeft){
+			if (Check.CollisionPlayerHit(
+					new Point((int) (pos.xPos),
+							(int) pos.yPos),
+					new Point((int) (pos.xPos),
+							(int) pos.yPos + (height / 2)),
+					player) && useSkill && animationState != 12){
+				player.dostal(skillJ.obrazenia);
+			}
 			animationState = 12;
 		}
 	}
@@ -260,7 +284,7 @@ public class EnemyPlayer {
 		
 		//stay
 		if(animationState == 0){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Stay.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(!right && !left && !up){
 				ani_Stay.update(System.currentTimeMillis());
@@ -268,7 +292,7 @@ public class EnemyPlayer {
 		}
 		//skok w prawo
 		if(animationState == 1){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_JumpRight.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(right && up || up && lookRight){
 				ani_JumpRight.update(System.currentTimeMillis());
@@ -277,23 +301,23 @@ public class EnemyPlayer {
 		}
 		//skok w lewo
 		if(animationState == 2){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_JumpLeft.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(left && up || up && lookLeft){
 				ani_JumpLeft.update(System.currentTimeMillis());
 			}
 		}
-		//prawo
+		//ruch w prawo
 		if(animationState == 3){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Right.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(right){
 				ani_Right.update(System.currentTimeMillis());
 			}
 		}
-		//lewo
+		//ruch w lewo
 		if(animationState == 4){
-			this.width = 25;
+			this.width = 30;
 			g.drawImage(ani_Left.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(left){
 				ani_Left.update(System.currentTimeMillis());
@@ -314,7 +338,7 @@ public class EnemyPlayer {
 		//cios J w lewo
 		if(animationState == 12){
 			this.width = 40;
-			pos.xPos -= 15.;
+			pos.xPos -= 10.;
 			g.drawImage(skillJ.ani_SkillLeft.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
 			if(lookLeft && useSkillJ){
 				if(!skillJ.ani_SkillLeft.updateSkill(System.currentTimeMillis())) {
@@ -323,7 +347,7 @@ public class EnemyPlayer {
 					skillJ.ani_SkillLeft.reset();
 				}
 			}
-			pos.xPos += 15.;
+			pos.xPos += 10.;
 		}
 	}
 
@@ -343,6 +367,30 @@ public class EnemyPlayer {
 
 	public void setPos(Vector2F pozycja) {
 		pos = pozycja;
+	}
+
+	public boolean contains(Point p2) {
+		int w = this.width;
+        int h = this.height;
+        if ((w | h) < 0) {
+            // At least one of the dimensions is negative...
+            return false;
+        }
+        // Note: if either dimension is zero, tests below must return false...
+        float x = this.pos.xPos;
+        float y = this.pos.yPos;
+        if (p2.x < x || p2.y < y) {
+            return false;
+        }
+        w += x;
+        h += y;
+        //    overflow || intersect
+        return ((w < x || w > p2.x) &&
+                (h < y || h > p2.y));
+	}
+
+	public void dostal(float obrazenia) {
+		this.zdrowie = this.zdrowie - obrazenia;
 	}
 
 }

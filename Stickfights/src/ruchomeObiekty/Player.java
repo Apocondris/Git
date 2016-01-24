@@ -24,10 +24,11 @@ public class Player implements KeyListener {
 	private static boolean up,down = true,left,right, useSkill=false;
 	private static boolean lookLeft, lookRight, useSkillJ, useSkillK, useSkillL;
 	private float speed = 2.9F;
-	private float zdrowie = 2.8F;
-	private float wytrzymalosc = 2.8F;
+	private float zdrowie = 100;
+	private float wytrzymalosc = 100;
 	
 	private int animationState = 0;
+	private EnemyPlayer enemyPlayer;
 	
 	private ArrayList<BufferedImage> listStay;
 	Animator ani_Stay;
@@ -49,18 +50,24 @@ public class Player implements KeyListener {
 	
 	public Player() {
 		pos = new Vector2F(Stickfights.width/3,Stickfights.height-200);
+		this.zdrowie = 100;
 	}
 	
 	public Player (int posX, int posY)
 	{
 		pos = new Vector2F(posX, posY);
+		this.zdrowie = 100;
 	}
 
 	public void init() {
-		
 		ladujTekstury("blue");
 		skillJ.init();
-		
+	}
+	
+	public void init(EnemyPlayer enemy) {
+		ladujTekstury("blue");
+		skillJ.init();
+		this.enemyPlayer = enemy;
 	}
 
 	private void ladujTekstury(String kolor) {
@@ -159,7 +166,7 @@ public class Player implements KeyListener {
 
 	public void tick(double deltaTime) {
 		float moveAmount = (float)(speed);
-		float jumpAmount = (float) (2.*speed);
+		float jumpAmount = (float) (2.1*speed);
 		
 		if(up){
 			if(flaga<33){
@@ -248,9 +255,25 @@ public class Player implements KeyListener {
 			animationState = 2;
 		}
 		if(useSkillJ && lookRight){
+			if (Check.CollisionPlayerHit(
+					new Point((int) (pos.xPos + width),
+							(int) pos.yPos),
+					new Point((int) (pos.xPos + width),
+							(int) pos.yPos + (height / 2)),
+					enemyPlayer) && useSkill && animationState != 11){
+				enemyPlayer.dostal(skillJ.obrazenia);
+			}
 			animationState = 11;
 		}
 		if(useSkillJ && lookLeft){
+			if (Check.CollisionPlayerHit(
+					new Point((int) (pos.xPos),
+							(int) pos.yPos),
+					new Point((int) (pos.xPos),
+							(int) pos.yPos + (height / 2)),
+					enemyPlayer) && useSkill && animationState != 12){
+				enemyPlayer.dostal(skillJ.obrazenia);
+			}
 			animationState = 12;
 		}
 	}
@@ -399,4 +422,27 @@ public class Player implements KeyListener {
 		pos = pozycja;
 	}
 
+	public boolean contains(Point p2) {
+		int w = this.width;
+        int h = this.height;
+        if ((w | h) < 0) {
+            // At least one of the dimensions is negative...
+            return false;
+        }
+        // Note: if either dimension is zero, tests below must return false...
+        float x = this.pos.xPos;
+        float y = this.pos.yPos;
+        if (p2.x < x || p2.y < y) {
+            return false;
+        }
+        w += x;
+        h += y;
+        //    overflow || intersect
+        return ((w < x || w > p2.x) &&
+                (h < y || h > p2.y));
+	}
+
+	public void dostal(float obrazenia) {
+		this.zdrowie = this.zdrowie - obrazenia;
+	}
 }
