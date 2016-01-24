@@ -20,10 +20,12 @@ public class ConnectionClient{
 		}
 	}
 	
-	public void sendData(String data) throws IOException{
+	public void sendData(String[] data) throws IOException{
 
+		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4];
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		out.println(data);
+		System.out.println("wyslane - " + wiadomosc);     
+		out.println(wiadomosc);
 	}
 	
 	public String getData() throws IOException {
@@ -31,7 +33,8 @@ public class ConnectionClient{
 		BufferedReader inFromServer = new BufferedReader(
 				new InputStreamReader(clientSocket.getInputStream()));   
 		
-		odebrane = inFromServer.readLine();             
+		odebrane = inFromServer.readLine();
+		System.out.println("odebrane - " + odebrane);     
 		return odebrane;
 	}
 

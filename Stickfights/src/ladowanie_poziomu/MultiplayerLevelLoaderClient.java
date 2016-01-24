@@ -33,6 +33,7 @@ public class MultiplayerLevelLoaderClient extends GameState {
 	@Override
 	public void init() {
 		
+		//ggg
 		player.init();
 		enemyPlayer.init();
 		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
@@ -43,9 +44,30 @@ public class MultiplayerLevelLoaderClient extends GameState {
 
 	@Override
 	public void tick(double deltaTime) {
-
+		String[] data = {"0","0","0","0","0"};
+		String enemyKeys = "00000";
+		for (int i=0; i<5; i++) {
+			data[i] = "0";
+		}
+		
 		map.tick(deltaTime);
 		player.tick(deltaTime);
+
+		try {
+			enemyKeys = polaczenie.getData();
+			data = enemyKeys.split("");
+			enemyPlayer.setKeys(data);
+			if(data[4]=="1"){
+				
+			}
+			
+			data = player.getPresserdKeys();
+			polaczenie.sendData(data);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		enemyPlayer.tick(deltaTime);
 	}
 

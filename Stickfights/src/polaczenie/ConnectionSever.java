@@ -3,6 +3,8 @@ package polaczenie;
 import java.io.*;
 import java.net.*;
 
+import engine.Vector2F;
+
 public class ConnectionSever implements Runnable{
 	int port = 52825;
 	String odebrane;
@@ -21,10 +23,12 @@ public class ConnectionSever implements Runnable{
 	}
 	
 	//TODO -- zmieniæ typ danych
-	public void sendData(String data) throws IOException{
+	public void sendData(String[] data) throws IOException{
 
+		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4];
+		System.out.println("wysylane - " + wiadomosc);
 		PrintWriter out = new PrintWriter(connectionSocket.getOutputStream(), true);
-		out.println(data);
+		out.println(wiadomosc);
 	}
 	
 	//TODO -- zmieniæ typ danych
@@ -32,7 +36,8 @@ public class ConnectionSever implements Runnable{
 		
 		BufferedReader inFromClient = new BufferedReader(
 				new InputStreamReader(connectionSocket.getInputStream()));                       
-		odebrane = inFromClient.readLine();             
+		odebrane = inFromClient.readLine();   
+		System.out.println("odebrane - " + odebrane);          
 		return odebrane;
 	}
 
@@ -43,5 +48,13 @@ public class ConnectionSever implements Runnable{
 			connected = true;
 		} catch (IOException e) {
 		}
+	}
+
+	public void sendPos(Object pos) {
+		
+	}
+
+	public Vector2F getPos() {
+		return null;
 	}
 }

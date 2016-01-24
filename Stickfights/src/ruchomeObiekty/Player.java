@@ -58,7 +58,7 @@ public class Player implements KeyListener {
 
 	public void init() {
 		
-		ladujTekstury("black");
+		ladujTekstury("blue");
 		skillJ.init();
 		
 	}
@@ -158,8 +158,8 @@ public class Player implements KeyListener {
 	}
 
 	public void tick(double deltaTime) {
-		float moveAmount = (float)(speed * deltaTime);
-		float jumpAmount = (float) (2.*speed * deltaTime);
+		float moveAmount = (float)(speed);
+		float jumpAmount = (float) (2.*speed);
 		
 		if(up){
 			if(flaga<33){
@@ -373,6 +373,23 @@ public class Player implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
+	}
+
+	public String[] getPresserdKeys() {
+		String[] data = {"0","0","0","0","0"};
+		if(up == true) data[0] = "1";
+		if(down == true) data[1] = "1";
+		if(left == true) data[2] = "1";
+		if(right == true) data[3] = "1";
+		return data;
+	}
+
+	public Object getPos() {
+		return pos;
+	}
+
+	public void setPos(Vector2F pozycja) {
+		pos = pozycja;
 	}
 
 }
