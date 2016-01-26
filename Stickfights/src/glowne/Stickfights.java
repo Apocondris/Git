@@ -29,7 +29,5 @@ public class Stickfights extends JFrame{
 		okno.addKeyListener(new Player());
 		okno.addKeyListener(new TrainingLevelLoader(null));
 		okno.getContentPane().add(new GameLoop(width,height,okno));
-		
 	}
-
 }

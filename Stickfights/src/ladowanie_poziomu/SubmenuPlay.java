@@ -22,7 +22,6 @@ public class SubmenuPlay extends GameState implements KeyListener{
 
 	@Override
 	public void init() {
-
 	}
 
 	@Override

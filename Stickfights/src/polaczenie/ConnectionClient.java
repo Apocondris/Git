@@ -21,20 +21,21 @@ public class ConnectionClient{
 	}
 	
 	public void sendData(String[] data) throws IOException{
-
 		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4] + data[5] + data[6] + data[7];
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		System.out.println("wyslane - " + wiadomosc);     
 		out.println(wiadomosc);
+	}
+	
+	public void sendData(String data) throws IOException{
+		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+		out.println(data);
 	}
 	
 	public String getData() throws IOException {
 		
 		BufferedReader inFromServer = new BufferedReader(
-				new InputStreamReader(clientSocket.getInputStream()));   
-		
+				new InputStreamReader(clientSocket.getInputStream()));
 		odebrane = inFromServer.readLine();
-		System.out.println("odebrane - " + odebrane);     
 		return odebrane;
 	}
 

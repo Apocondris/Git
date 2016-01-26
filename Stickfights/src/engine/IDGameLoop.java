@@ -66,7 +66,6 @@ public class IDGameLoop extends JPanel implements Runnable {
 			}
 			
 			if(shouldRender){
-				//TODO 
 				ticks(deltaTime);
 				frames ++;
 				//RENDER

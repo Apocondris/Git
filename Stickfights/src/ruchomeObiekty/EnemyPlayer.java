@@ -1,6 +1,7 @@
 package ruchomeObiekty;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -24,7 +25,7 @@ public class EnemyPlayer {
 	private static boolean up,down = true,left,right, useSkill=false;
 	private static boolean lookLeft, lookRight, useSkillJ, useSkillK, useSkillL;
 	private float speed = 2.9F;
-	private float zdrowie = 100;
+	public float zdrowie = 100;
 	private float wytrzymalosc = 100;
 	
 	private int animationState = 0;
@@ -349,14 +350,36 @@ public class EnemyPlayer {
 			}
 			pos.xPos += 10.;
 		}
+		
+		g.setColor(new Color(0, 0, 0));
+		g.setFont(new Font("Arial", Font.BOLD, 26));
+		g.drawString(Float.toString(zdrowie), 1300, 20);
+		
 	}
 
 	public void setKeys(String[] enemyKeys) {
 		if(enemyKeys[0].equals("1")) up = true; else up = false;
 		if(enemyKeys[1].equals("1")) down = true; else down = false;
-		if(enemyKeys[2].equals("1")) left = true; else left = false;
-		if(enemyKeys[3].equals("1")) right = true; else right = false;
-		if(enemyKeys[4].equals("1")) useSkillJ = true; else useSkillJ = false;
+		if(enemyKeys[2].equals("1")) {
+			left = true; 
+			lookLeft = true;
+			lookRight = false;
+		}
+		else {
+			left = false;
+		}
+		if(enemyKeys[3].equals("1")) {
+			right = true; 
+			lookRight = true;
+			lookLeft = false;
+		}
+		else {
+			right = false;
+		}
+		if(enemyKeys[4].equals("1")) {
+			useSkill = true;
+			useSkillJ = true;
+		}
 		if(enemyKeys[5].equals("1")) useSkillK = true; else useSkillK = false;
 		if(enemyKeys[6].equals("1")) useSkillL = true; else useSkillL = false;
 	}
@@ -367,6 +390,12 @@ public class EnemyPlayer {
 
 	public void setPos(Vector2F pozycja) {
 		pos = pozycja;
+	}
+	public void setPosX(String pozycja) {
+		pos.xPos = Float.parseFloat(pozycja);
+	}
+	public void setPosY(String pozycja) {
+		pos.yPos = Float.parseFloat(pozycja);
 	}
 
 	public boolean contains(Point p2) {

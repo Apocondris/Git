@@ -17,7 +17,7 @@ import stany_gry.GameStateManager;
 
 public class ClientScreen extends GameState implements KeyListener{
 	private static boolean enter=false;
-	private static String ip="";
+	private static String ip="localhost";
 	ConnectionClient polaczenie;
 
 	public ClientScreen(GameStateManager gsm) {

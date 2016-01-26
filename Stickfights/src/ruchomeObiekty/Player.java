@@ -1,12 +1,14 @@
 package ruchomeObiekty;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import javax.swing.text.html.HTMLDocument.HTMLReader.BlockAction;
 
@@ -17,6 +19,9 @@ import glowne.Check;
 import glowne.Stickfights;
 
 public class Player implements KeyListener {
+
+	Timer timer = new Timer();
+	long time = 0;
 	
 	Vector2F pos = new Vector2F();
 	private int width = 30; 
@@ -60,8 +65,9 @@ public class Player implements KeyListener {
 	}
 
 	public void init() {
-		ladujTekstury("blue");
+		ladujTekstury("black");
 		skillJ.init();
+		this.enemyPlayer = new EnemyPlayer();
 	}
 	
 	public void init(EnemyPlayer enemy) {
@@ -349,6 +355,31 @@ public class Player implements KeyListener {
 			}
 			pos.xPos += 10.;
 		}
+		
+		g.setColor(new Color(0, 0, 0));
+		g.setFont(new Font("Arial", Font.BOLD, 26));
+		g.drawString(Float.toString(zdrowie), 40, 20);
+		
+		if (this.zdrowie <= 0) {
+			g.setFont(new Font("Arial", Font.BOLD, 60));
+			g.drawString("Przegrales", 550, 300);
+			if (time == 0){
+				time = System.currentTimeMillis();
+			}
+			if (System.currentTimeMillis()-time > 4000){
+				System.exit(1);
+			}
+		}
+		if (enemyPlayer.zdrowie <= 0) {
+			g.setFont(new Font("Arial", Font.BOLD, 60));
+			g.drawString("Wygrales", 550, 300);
+			if (time == 0){
+				time = System.currentTimeMillis();
+			}
+			if (System.currentTimeMillis()-time > 4000){
+				System.exit(1);
+			}
+		}
 	}
 
 	@Override
@@ -416,6 +447,12 @@ public class Player implements KeyListener {
 
 	public Object getPos() {
 		return pos;
+	}
+	public float getPosX() {
+		return pos.xPos;
+	}
+	public float getPosY() {
+		return pos.yPos;
 	}
 
 	public void setPos(Vector2F pozycja) {

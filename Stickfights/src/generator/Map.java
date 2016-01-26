@@ -34,8 +34,8 @@ public class Map {
 		
 		tiles.blocks.add(
 				new Block(
-						new Vector2F(0,Stickfights.height-35),
-						Stickfights.width,30));
+						new Vector2F(0,Stickfights.height-62),
+						Stickfights.width,70));
 		
 		tiles.blocks.add(
 				new Block(

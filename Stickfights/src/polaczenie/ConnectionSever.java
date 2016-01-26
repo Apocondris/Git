@@ -22,22 +22,22 @@ public class ConnectionSever implements Runnable{
 		this.connected = false;
 	}
 	
-	//TODO -- zmieniæ typ danych
 	public void sendData(String[] data) throws IOException{
-
 		String wiadomosc = data[0] + data[1] + data[2] + data[3] + data[4] + data[5] + data[6] + data[7];
-		System.out.println("wysylane - " + wiadomosc);
 		PrintWriter out = new PrintWriter(connectionSocket.getOutputStream(), true);
 		out.println(wiadomosc);
 	}
 	
-	//TODO -- zmieniæ typ danych
+	public void sendData(String data) throws IOException{
+		PrintWriter out = new PrintWriter(connectionSocket.getOutputStream(), true);
+		out.println(data);
+	}
+	
 	public String getData() throws IOException {
 		
 		BufferedReader inFromClient = new BufferedReader(
 				new InputStreamReader(connectionSocket.getInputStream()));                       
-		odebrane = inFromClient.readLine();   
-		System.out.println("odebrane - " + odebrane);          
+		odebrane = inFromClient.readLine();       
 		return odebrane;
 	}
 

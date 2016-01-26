@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import engine.SpriteSheet;
 import generator.Map;
@@ -28,9 +29,8 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 	
 	@Override
 	public void init() {
-		
 		player.init();
-		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
+		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"tloGry.png"));
 		File plik = new File("mapa.txt");
 		map = new Map(plik);
 		map.init();
@@ -47,7 +47,7 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 		//g.setBackground(new Color(255, 255, 255));
 		//g.drawString("Hello world", 200, 200);
 
-		g.drawImage(background.getTile(0, 0, 999, 699),0,0,Stickfights.width, Stickfights.height, null);
+		g.drawImage(background.getTile(0, 0, 1399, 799),0,0,Stickfights.width, Stickfights.height, null);
 		
 		map.render(g);
 		player.render(g);
@@ -58,6 +58,24 @@ public class TrainingLevelLoader extends GameState implements KeyListener{
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_ESCAPE){
+			if (MultiplayerLevelLoaderClient.polaczenie != null)
+			{
+				try {
+					MultiplayerLevelLoaderClient.polaczenie.sendData("exit");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("exit client");
+			}
+			if (MultiplayerLevelLoaderServer.polaczenie != null)
+			{
+				try {
+					MultiplayerLevelLoaderServer.polaczenie.sendData("exit");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				System.out.println("exit server");
+			}
 			gsm.states.pop();
 			gsm.states.push(new MenuState(gsm));
 		}

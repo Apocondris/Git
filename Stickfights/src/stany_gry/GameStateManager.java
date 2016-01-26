@@ -33,7 +33,5 @@ public class GameStateManager {
 		states.peek().init();
 	}
 	
-	public void startTraining (){
-		states.push(new TrainingLevelLoader(this));
-	}
+	
 }

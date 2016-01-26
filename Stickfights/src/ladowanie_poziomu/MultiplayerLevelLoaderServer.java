@@ -16,7 +16,7 @@ import stany_gry.GameStateManager;
 
 public class MultiplayerLevelLoaderServer extends GameState {
 
-	ConnectionSever polaczenie;
+	static ConnectionSever polaczenie;
 	Map map;
 	SpriteSheet background = new SpriteSheet();
 	Player player;
@@ -31,11 +31,12 @@ public class MultiplayerLevelLoaderServer extends GameState {
 
 	@Override
 	public void init() {
-		player = new Player(200,690);
-		enemyPlayer = new EnemyPlayer(800,690);
+		player = new Player(200,650);
+		enemyPlayer = new EnemyPlayer(800,650);
+		
 		player.init(enemyPlayer);
 		enemyPlayer.init(player);
-		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"training_map.png"));
+		background.setSpriteSheet(LoadImageFrom.loadImageFrom(Stickfights.class,"tloGry.png"));
 		File plik = new File("mapa.txt");
 		map = new Map(plik);
 		map.init();
@@ -48,33 +49,66 @@ public class MultiplayerLevelLoaderServer extends GameState {
 		String enemyKeys = "00000000";
 		przebiegi ++;
 		
-
 		map.tick(deltaTime);
 		player.tick(deltaTime);
 		try {
 			data = player.getPressedKeys();
-			if(przebiegi > 350) data[7] = "1";
+			if(przebiegi > 50) data[7] = "1";
 			else data[7] = "0";
 			polaczenie.sendData(data);
 			
-			enemyKeys = polaczenie.getData();
-			data = enemyKeys.split("");
-			enemyPlayer.setKeys(data);
+			if (data[7].equals("1")){
+				
+				//synchronizacja();
+			}
 			
+			enemyKeys = polaczenie.getData();
+			if(enemyKeys.equals("exit")){
+				gsm.states.pop();
+				gsm.states.push(new MenuState(gsm));
+			}
+			else {
+				data = enemyKeys.split("");
+				enemyPlayer.setKeys(data);
+			}
+			//System.out.println("koniec ticku server");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		enemyPlayer.tick(deltaTime);
-		System.out.println("\n");
+	}
+
+	private void synchronizacja() throws IOException {
+		System.out.println("synchronizacja server");
+		
+		String temp = Float.toString(player.getPosX());
+		polaczenie.sendData(temp);
+		System.out.print(temp);
+		System.out.println(" - wyslano server");
+		
+		temp = polaczenie.getData();
+		enemyPlayer.setPosX(temp);
+		System.out.print(temp);
+		System.out.println(" - odebrano server");
+		
+		temp = Float.toString(player.getPosY());
+		polaczenie.sendData(temp);
+		System.out.print(temp);
+		System.out.println(" - wyslano server");
+		
+		temp = polaczenie.getData();
+		enemyPlayer.setPosY(temp);
+		System.out.print(temp);
+		System.out.println(" - odebrano server");
+		przebiegi = 0;
 	}
 
 	@Override
 	public void render(Graphics2D g) {
 		//g.setFont(new Font("Ariel", Font.BOLD, 23));
 		//g.drawString("Tu bêdzie gra", 500, 200);
-		System.out.println("Odswiezenie");
 		
-		g.drawImage(background.getTile(0, 0, 999, 699),0,0,Stickfights.width, Stickfights.height, null);
+		g.drawImage(background.getTile(0, 0, 1399, 799),0,0,Stickfights.width, Stickfights.height, null);
 		
 		map.render(g);
 		player.render(g);
